@@ -45,7 +45,7 @@
     TXLIVE.settings.xss_protect = Boolean(TXLIVE.settings.xss_protect | 0);
     TXLIVE.settings.manual_init = Boolean(TXLIVE.settings.manual_init |
       0);
-    TXLIVE.settings.reload_on_language_picker = Boolean(TXLIVE.settings.reload_on_language_picker | 0);
+    // TXLIVE.settings.reload_on_language_picker = Boolean(TXLIVE.settings.reload_on_language_picker | 0);
     TXLIVE.settings.translate_urls = Boolean(TXLIVE.settings.translate_urls | 0);
     TXLIVE.settings.ignore_databind = Boolean(TXLIVE.settings.ignore_databind | 0);
     TXLIVE.settings.staging = Boolean(TXLIVE.settings.staging | 0);
@@ -55,9 +55,6 @@
       TXLIVE.settings.sidebar_base_url || "https://app.transifex.com";
     TXLIVE.settings.assets_base_url = TXLIVE.settings.assets_base_url || TXLIVE.settings.sidebar_base_url;
     TXLIVE.settings.sidebar_lang = TXLIVE.settings.sidebar_lang || "en";
-    TXLIVE.settings.telemetry_url = TXLIVE.settings.telemetry_url || "https://telemetry.svc.transifex.net/live/integration";
-    if ("ping_telemetry" in TXLIVE.settings) TXLIVE.settings.ping_telemetry = !!TXLIVE.settings.ping_telemetry;
-    else TXLIVE.settings.ping_telemetry = true;
     if (TXLIVE.settings.detectlang &&
       typeof TXLIVE.settings.detectlang === "string") TXLIVE.settings.detectlang = Boolean(TXLIVE.settings.detectlang | 0);
     if (TXLIVE.settings.parse_attr && TXLIVE.settings.parse_attr.length)
@@ -655,29 +652,29 @@
     if (url) script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script)
   };
-  TXLIVE_PRIVATE.getBrowserLocale = function() {
-    var i, code;
-    if (navigator.languages && navigator.languages.length)
-      for (i = 0; i < navigator.languages.length; ++i) {
-        code = TXLIVE.normalizeLangCode(navigator.languages[i]);
-        if (TXLIVE.hasLanguageCode(code)) return code;
-        code = TXLIVE.matchLanguageCode(navigator.languages[i]);
-        if (code) return code
-      }
-    if (navigator.userLanguage) {
-      code = TXLIVE.normalizeLangCode(navigator.userLanguage);
-      if (TXLIVE.hasLanguageCode(code)) return code;
-      code = TXLIVE.matchLanguageCode(navigator.userLanguage);
-      if (code) return code
-    }
-    if (navigator.language) {
-      code = TXLIVE.normalizeLangCode(navigator.language);
-      if (TXLIVE.hasLanguageCode(code)) return code;
-      code = TXLIVE.matchLanguageCode(navigator.language);
-      if (code) return code
-    }
-    return null
-  };
+  // TXLIVE_PRIVATE.getBrowserLocale = function() {
+  //   var i, code;
+  //   if (navigator.languages && navigator.languages.length)
+  //     for (i = 0; i < navigator.languages.length; ++i) {
+  //       code = TXLIVE.normalizeLangCode(navigator.languages[i]);
+  //       if (TXLIVE.hasLanguageCode(code)) return code;
+  //       code = TXLIVE.matchLanguageCode(navigator.languages[i]);
+  //       if (code) return code
+  //     }
+  //   if (navigator.userLanguage) {
+  //     code = TXLIVE.normalizeLangCode(navigator.userLanguage);
+  //     if (TXLIVE.hasLanguageCode(code)) return code;
+  //     code = TXLIVE.matchLanguageCode(navigator.userLanguage);
+  //     if (code) return code
+  //   }
+  //   if (navigator.language) {
+  //     code = TXLIVE.normalizeLangCode(navigator.language);
+  //     if (TXLIVE.hasLanguageCode(code)) return code;
+  //     code = TXLIVE.matchLanguageCode(navigator.language);
+  //     if (code) return code
+  //   }
+  //   return null
+  // };
 
   function mergeArrays(array1, array2) {
     var i = array2.length,
@@ -3092,31 +3089,6 @@
     })
   }
 
-  function __ping_telemetry__() {
-    if (TXLIVE.settings.wp) TXLIVE.settings.integration = "wordpress";
-    var shouldPing = false;
-    if (TXLIVE.settings.ping_telemetry && TXLIVE.settings.api_key && TXLIVE.settings.has_storage) {
-      var lastPing =
-        TXLIVE_PRIVATE.storage_get("telemetry_ping");
-      if (lastPing) {
-        lastPing = parseInt(lastPing, 10);
-        if (!Number.isNaN(lastPing)) {
-          var now = (new Date).getTime();
-          shouldPing = now - lastPing > 3 * 60 * 60 * 1E3
-        } else shouldPing = true
-      } else shouldPing = true
-    }
-    if (shouldPing) {
-      TXLIVE.doCORSRequest(TXLIVE.settings.telemetry_url, "post", JSON.stringify({
-        data: {
-          api_key: TXLIVE.settings.api_key,
-          integration: TXLIVE.settings.integration || "live"
-        }
-      }));
-      TXLIVE_PRIVATE.storage_set("telemetry_ping", "" + now)
-    }
-  }
-
   function __init__() {
     if (!TXLIVE_PRIVATE._domready) return;
     try {
@@ -3162,7 +3134,6 @@
       __traverseready__();
       __ready__()
     }
-    __ping_telemetry__()
   }
   TXLIVE.init = function() {
     TXLIVE_PRIVATE._domready = true;
