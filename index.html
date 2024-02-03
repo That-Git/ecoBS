@@ -4,7 +4,7 @@
     
     <meta name="viewport" content="width=device-width, maximum-scale=1">
     
-        <link rel="stylesheet" href="./eco_files/launch-1689939607406.css" media="">
+        <link rel="stylesheet" href="./src/launch-1689939607406.css" media="">
     
     <link rel="shortcut icon" type="image/png" href="https://d33v4339jhl8k0.cloudfront.net/docs/assets/5e60a62104286364bc963e0c/images/6352604b4d805871ceaa564b/variant-2.png">
     
@@ -18,7 +18,7 @@
     
     
         <script type="text/javascript">window.liveSettings={api_key:"611c1a71bdf946f187b34ebee8a6e08c"};</script>
-<script type="text/javascript" src="./eco_files/live.js"></script>
+<script type="text/javascript" src="./src/live.js"></script>
     
 </head>
     
@@ -71,26 +71,25 @@
             <div id="noResults" style="display:none;">No results found</div>
         </section><!--/.fluid-container-->
         
-    <script src="./eco_files/app3.min.js"></script>
+    <script src="./src/app3.min.js"></script>
 
-<script>
-// keep iOS links from opening safari
-if(("standalone" in window.navigator) && window.navigator.standalone){
-// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
-var noddy, remotes = false;
-document.addEventListener('click', function(event) {
-noddy = event.target;
-while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
-noddy = noddy.parentNode;
-}
+	<script>
+		// keep iOS links from opening safari
+		if(("standalone" in window.navigator) && window.navigator.standalone){
+		// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+		var noddy, remotes = false;
+		document.addEventListener('click', function(event) {
+		noddy = event.target;
+		while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+		noddy = noddy.parentNode;
+		}
 
-if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
-event.preventDefault();
-document.location.href = noddy.href;
-}
+		if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
+		event.preventDefault();
+		document.location.href = noddy.href;
+		}
 
-},false);
-}
-</script>
-        
+		},false);
+		}
+	</script>
 </body></html>
