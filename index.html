@@ -43,28 +43,9 @@
 						<span class="rating-face">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
 								<path fill-rule="evenodd" d="M7.385 13.846a1.846 1.846 0 1 1 0-3.692 1.846 1.846 0 0 1 0 3.692zm9.23 0a1.846 1.846 0 1 1 0-3.692 1.846 1.846 0 0 1 0 3.692zm-.967 4.95a.992.992 0 0 1-.615-.212c-1.701-1.349-4.364-1.349-6.065 0a.998.998 0 0 1-1.36-.123.895.895 0 0 1 .127-1.3A6.897 6.897 0 0 1 12 15.692c1.555 0 3.069.521 4.266 1.467.41.326.467.909.127 1.3a.982.982 0 0 1-.745.335z"></path>
-					</svg>
-				</span>
-			</button>
-		</div>
-	</div>
-	<script>
-		// keep iOS links from opening safari
-		if(("standalone" in window.navigator) && window.navigator.standalone){
-		// If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
-		var noddy, remotes = false;
-		document.addEventListener('click', function(event) {
-		noddy = event.target;
-		while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
-		noddy = noddy.parentNode;
-		}
-
-		if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes)){
-		event.preventDefault();
-		document.location.href = noddy.href;
-		}
-
-		},false);
-		}
-	</script>
+							</svg>
+						</span>
+					</button>
+				</div>
+			</div>
 </body></html>
